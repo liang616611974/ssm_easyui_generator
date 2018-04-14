@@ -1,0 +1,6 @@
+/*
+ * Powered By [liangfeng]
+ * Web Site: http://www.liangfeng.com
+ * <#if now??>${now?string('yyyy-MM-dd')}</#if>
+ */
+
