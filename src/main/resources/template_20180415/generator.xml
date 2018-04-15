@@ -8,15 +8,12 @@
 	</comment>
 	
 	<!-- 包的基础路径 ${basepackage}.model-->
-	<entry key="basePackage">com.liangfeng.study</entry>
-	<entry key="module">goods</entry>
+	<entry key="basePackage">cn.healthmall.teamsite</entry>
 	<entry key="corePackage">${basePackage}.core</entry>
 	<entry key="commonPackage">${basePackage}.common</entry>
-	<entry key="baseModulePackage">${basePackage}.${module}</entry>
-	<entry key="pojoPackage">${baseModulePackage}.model.pojo</entry>
-	<entry key="qoPackage">${baseModulePackage}.model.qo</entry>
-
-
+	<entry key="framePackage">${basePackage}.common.framework</entry>
+	<entry key="module">admin</entry>
+	
 	<!-- jsp namespace: web/${namespace}/${className}/list.jsp -->
 	<entry key="namespace">pages</entry>
 

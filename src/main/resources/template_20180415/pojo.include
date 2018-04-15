@@ -2,7 +2,7 @@
 <#macro generateFields>
 	<#list table.columns as column>
 	/** 
-	 * ${column.columnAlias!} ${column.sqlName}
+	 * ${column.sqlName} ${column.columnAlias!} 
 	 */
 	private ${(column.javaType?contains("Timestamp")||column.javaType?contains("Time"))?string("Date",column.javaType)} ${column.columnNameLower};
 	

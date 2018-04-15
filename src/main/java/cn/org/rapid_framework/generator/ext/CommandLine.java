@@ -68,7 +68,7 @@ public class CommandLine {
 	}
 	
 	private static String getTemplateRootDir() {
-		return System.getProperty("templateRootDir", "template");
+		return System.getProperty("templateRootDir", "template_20180415");
 	}
 
 	private static void printUsages() {

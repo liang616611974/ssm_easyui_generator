@@ -1,0 +1,63 @@
+<#-- 生成java字段-->
+<#macro generateFields>
+	<#list table.columns as column>
+	/** 
+	 * ${column.columnAlias} 
+	 */
+	<#if (column.isDateTimeColumn || column.isDateColumn)&& !column.contains("**")>
+	private Date ${column.columnNameLower}Begin;
+	private Date ${column.columnNameLower}End;
+	<#else>
+	private ${column.javaType} ${column.columnNameLower};
+	</#if>
+	</#list>
+</#macro>
+
+<#-- 生成java属性方法-->
+<#macro generateProperties>
+	<#list table.columns as column>
+	<#if column.isDateColumn && !column.contains("**")>
+	public Date get${column.columnName}Begin() {
+		return this.${column.columnNameLower}Begin;
+	}
+	
+	public void set${column.columnName}Begin(Date value) {
+		this.${column.columnNameLower}Begin = value;
+	}
+	
+	public Date get${column.columnName}End() {
+		return this.${column.columnNameLower}End;
+	}
+	
+	public void set${column.columnName}End(Date value) {
+		this.${column.columnNameLower}End = value;
+	}
+	
+	public String get${column.columnName}BeginStr() {
+		return DateHelper.format(get${column.columnName}Begin(), ${column.isDateTimeColumn?string("DATETIME_PATTERN","DATE_PATTERN")});
+	}
+	
+	public void set${column.columnName}BeginStr(String value) {
+		set${column.columnName}Begin(DateHelper.parse(value, ${column.isDateTimeColumn?string("DATETIME_PATTERN","DATE_PATTERN")}));
+	}
+	
+	public String get${column.columnName}EndStr() {
+		return DateHelper.format(get${column.columnName}End(), ${column.isDateTimeColumn?string("DATETIME_PATTERN","DATE_PATTERN")});
+	}
+	
+	public void set${column.columnName}EndStr(String value) {
+		set${column.columnName}End(DateHelper.parse(value, ${column.isDateTimeColumn?string("DATETIME_PATTERN","DATE_PATTERN")}));
+	}
+	
+	<#else>
+	public ${column.javaType} get${column.columnName}() {
+		return this.${column.columnNameLower};
+	}
+	
+	public void set${column.columnName}(${column.javaType} value) {
+		this.${column.columnNameLower} = value;
+	}
+	
+	</#if>	
+	</#list>
+</#macro>
