@@ -13,8 +13,9 @@
 	<entry key="corePackage">${basePackage}.core</entry>
 	<entry key="commonPackage">${basePackage}.common</entry>
 	<entry key="baseModulePackage">${basePackage}.${module}</entry>
-	<entry key="pojoPackage">${baseModulePackage}.model.pojo</entry>
-	<entry key="qoPackage">${baseModulePackage}.model.qo</entry>
+	<entry key="pojoPackage">${baseModulePackage}.dao.auto.model.pojo</entry>
+	<entry key="qoPackage">${baseModulePackage}.dao.auto.model.qo</entry>
+	<entry key="baseObjPackage">${corePackage}.framework.base</entry>
 
 
 	<!-- jsp namespace: web/${namespace}/${className}/list.jsp -->

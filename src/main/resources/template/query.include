@@ -1,11 +1,15 @@
 <#-- 生成java字段-->
 <#macro generateFields>
 	<#list table.columns as column>
-	/** 
-	 * ${column.columnAlias} 
-	 */
+
 	<#if (column.isDateTimeColumn || column.isDateColumn)&& !column.contains("**")>
+	/**
+     * ${column.columnAlias} 开始
+     */
 	private Date ${column.columnNameLower}Begin;
+	/**
+     * ${column.columnAlias} 结束
+     */
 	private Date ${column.columnNameLower}End;
 	<#else>
 	private ${column.javaType} ${column.columnNameLower};
