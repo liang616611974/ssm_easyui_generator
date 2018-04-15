@@ -9,7 +9,7 @@ import java.util.logging.Logger;
 
 import javax.sql.DataSource;
 
-import cn.org.rapid_framework.generator.GeneratorProperties;
+import cn.org.rapid_framework.generator.core.GeneratorProperties;
 /**
  * 用于提供生成器的数据源
  * 

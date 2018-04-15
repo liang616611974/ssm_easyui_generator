@@ -11,7 +11,7 @@ import java.util.Properties;
 import java.util.Set;
 import java.util.Map.Entry;
 
-import cn.org.rapid_framework.generator.GeneratorProperties;
+import cn.org.rapid_framework.generator.core.GeneratorProperties;
 
 public class PropertiesHelper {
 	boolean isSearchSystemProperty = false;

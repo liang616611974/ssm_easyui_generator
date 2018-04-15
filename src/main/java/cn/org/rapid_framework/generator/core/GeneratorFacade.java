@@ -1,4 +1,4 @@
-package cn.org.rapid_framework.generator;
+package cn.org.rapid_framework.generator.core;
 
 
 import java.io.File;
@@ -12,7 +12,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import cn.org.rapid_framework.generator.Generator.GeneratorModel;
+import cn.org.rapid_framework.generator.core.Generator;
+import cn.org.rapid_framework.generator.core.Generator.GeneratorModel;
+import cn.org.rapid_framework.generator.core.GeneratorProperties;
 import cn.org.rapid_framework.generator.provider.db.sql.model.Sql;
 import cn.org.rapid_framework.generator.provider.db.table.TableFactory;
 import cn.org.rapid_framework.generator.provider.db.table.model.Table;

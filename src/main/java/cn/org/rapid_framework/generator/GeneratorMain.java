@@ -1,6 +1,9 @@
 package cn.org.rapid_framework.generator;
 
 
+import cn.org.rapid_framework.generator.core.GeneratorFacade;
+import cn.org.rapid_framework.generator.core.GeneratorProperties;
+
 /**
  * 
  * @author badqiu
@@ -21,8 +24,7 @@ public class GeneratorMain {
         //g.generateByClass(Blog.class,"template_clazz");
         //g.deleteByTable("table_name", "template"); ///删除生成的文件
 		
-		//生成代码后，打开所在的文件夹 
-		String openPath = "/java_src/cn/healthmall/teamsite";
-		Runtime.getRuntime().exec("cmd.exe /c start "+GeneratorProperties.getRequiredProperty("outRoot") + openPath);
+		//生成代码后，打开所在的文件夹
+		Runtime.getRuntime().exec("cmd.exe /c start "+ GeneratorProperties.getRequiredProperty("outRoot"));
 	}
 }

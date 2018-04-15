@@ -15,7 +15,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import cn.org.rapid_framework.generator.GeneratorProperties;
+import cn.org.rapid_framework.generator.core.GeneratorProperties;
 /**
  * 
  * @author badqiu

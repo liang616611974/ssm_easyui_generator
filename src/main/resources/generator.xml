@@ -9,7 +9,7 @@
 	
 	<!-- 包的基础路径 ${basepackage}.model-->
 	<entry key="basePackage">cn.healthmall.teamsite</entry>
-	<entry key="corePackage">cn.healthmall.teamsite.core</entry>
+	<entry key="corePackage">${basePackage}.core</entry>
 	<entry key="commonPackage">cn.healthmall.teamsite.common</entry>
 	<entry key="framePackage">cn.healthmall.teamsite.common.framework</entry>
 	<entry key="module">admin</entry>

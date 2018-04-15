@@ -1,4 +1,4 @@
-package cn.org.rapid_framework.generator;
+package cn.org.rapid_framework.generator.core;
 
 import java.io.File;
 import java.io.FileInputStream;
