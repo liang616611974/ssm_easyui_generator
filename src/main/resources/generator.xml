@@ -15,6 +15,7 @@
 	<entry key="baseModulePackage">${basePackage}.${module}</entry>
 	<entry key="pojoPackage">${baseModulePackage}.dao.auto.model.pojo</entry>
 	<entry key="qoPackage">${baseModulePackage}.dao.auto.model.qo</entry>
+	<entry key="mapperPackage">${baseModulePackage}.dao.auto.mapper</entry>
 	<entry key="baseObjPackage">${corePackage}.framework.base</entry>
 
 
