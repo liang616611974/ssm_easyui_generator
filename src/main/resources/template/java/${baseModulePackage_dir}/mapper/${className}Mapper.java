@@ -5,7 +5,7 @@ package ${mapperPackage};
 
 
 import java.util.List;
-
+import org.apache.ibatis.annotations.Mapper;
 import ${pojoPackage}.${className};
 import ${qoPackage}.${className}Query;
 
@@ -42,6 +42,12 @@ public interface ${className}Mapper {
 		void delete(${table.idColumn.javaType} id);
 
 		/**
+		 * 获取
+		 * @param id
+		 */
+		${className} get(${table.idColumn.javaType} id);
+
+		/**
 		 * 查询
 		 * @return
 		 */
@@ -58,11 +64,14 @@ public interface ${className}Mapper {
 		 * @param query
 		 * @return
 		 */
-		int total(${className}Query query);
+		int count(${className}Query query);
 
 	<#list table.columns as column>
 	<#if column.unique && !column.pk>
-	${className} getBy${column.columnName}(${column.javaType} v);
+		/**
+		 * 根据${column.columnAlias}获取
+		 */
+		${className} getBy${column.columnName}(${column.javaType} v);
 	
 	</#if>
 	</#list>

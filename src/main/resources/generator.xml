@@ -11,12 +11,13 @@
 	<entry key="basePackage">com.liangfeng.study</entry>
 	<entry key="module">goods</entry>
 	<entry key="corePackage">${basePackage}.core</entry>
-	<entry key="commonPackage">${basePackage}.common</entry>
-	<entry key="baseModulePackage">${basePackage}.${module}</entry>
-	<entry key="pojoPackage">${baseModulePackage}.dao.auto.model.pojo</entry>
-	<entry key="qoPackage">${baseModulePackage}.dao.auto.model.qo</entry>
-	<entry key="mapperPackage">${baseModulePackage}.dao.auto.mapper</entry>
+	<!--<entry key="commonPackage">${basePackage}.common</entry>-->
 	<entry key="baseObjPackage">${corePackage}.framework.base</entry>
+	<entry key="baseModulePackage">${basePackage}.${module}</entry>
+	<entry key="pojoPackage">${baseModulePackage}.model.auto.pojo</entry>
+	<entry key="qoPackage">${baseModulePackage}.model.auto.qo</entry>
+	<entry key="mapperPackage">${baseModulePackage}.mapper</entry>
+
 
 
 	<!-- jsp namespace: web/${namespace}/${className}/list.jsp -->
@@ -45,7 +46,7 @@
 	<entry key="java_typemapping.java.math.BigDecimal">BigDecimal</entry>
 	
 	<!-- Mysql -->
-	<entry key="jdbc.url">jdbc:mysql://127.0.0.1:3306/shopping_mall?characterEncoding=UTF-8</entry>
+	<entry key="jdbc.url">jdbc:mysql://127.0.0.1:3306/spring_cloud_demo?characterEncoding=UTF-8</entry>
 	<entry key="jdbc.driver">com.mysql.jdbc.Driver</entry>
 	<entry key="jdbc.username">root</entry>
 	<entry key="jdbc.password">root</entry>

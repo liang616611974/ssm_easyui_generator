@@ -1,52 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>  
 <!DOCTYPE mapper   
-PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <#include "/macro.include"/>
 <#assign className = table.className>
 <#assign classNameFirstLower = table.classNameFirstLower>
 <#macro namespace>${className}.</#macro>
 
 <!-- 不使用namespace的话sql搜索定位会比较方便 -->
-<mapper namespace="${className}">
+<mapper namespace="${mapperPackage}.${className}Mapper">
 
 	<!-- 类映射 -->
-	<resultMap id="RM_${className}" type="${classNameFirstLower}">
+	<resultMap id="RM_${className}" type="${pojoPackage}.${className}">
 		<#list table.columns as column>
-		<result property="${column.columnNameLower}" column="${column.sqlName}" />
+		<result property="${column.columnNameLower}" column="${column.sqlName}" jdbcType="${column.jdbcType}" />
 		</#list>
 	</resultMap>
 
 	<!-- 用于select查询公用的列 -->
-	<sql id="<@namespace/>columns">
+	<sql id="columns">
 	    <![CDATA[
 		<#list table.columns as column>${column.sqlName}<#if column_has_next>,</#if></#list>
 	    ]]>
 	</sql>
 
 	<!-- 用于select查询公用的条件  -->
-	<sql id="<@namespace/>where">
+	<sql id="where">
 		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
 		<where>
 			<#list table.columns as column>
 			<#if column.isDateTimeColumn>
-			<if test="${column.columnNameFirstLower}Begin != null">
-				AND ${column.sqlName} >= <@mapperEl column.columnNameFirstLower+"Begin"/>
+			<if test="@Ognl@isNotEmpty(${column.columnNameFirstLower}Begin)">
+				AND ${column.sqlName} >= <@mapperEl column.columnNameFirstLower+"Begin" + ',jdbcType=' + column.jdbcType/>
 			</if>
-			<if test="${column.columnNameFirstLower}End != null">
-				AND ${column.sqlName} &lt;= <@mapperEl column.columnNameFirstLower+"End"/>
+			<if test="@Ognl@isNotEmpty(${column.columnNameFirstLower}End)">
+				AND ${column.sqlName + ',jdbcType=' + column.jdbcType} &lt;= <@mapperEl column.columnNameFirstLower+"End" + ',jdbcType=' + column.jdbcType/>
 			</if>
 			<#else>
 			<if test="@Ognl@isNotEmpty(${column.columnNameFirstLower})">
-				AND ${column.sqlName} = <@mapperEl column.columnNameFirstLower/>
+				AND ${column.sqlName + ',jdbcType=' + column.jdbcType} = <@mapperEl column.columnNameFirstLower + ',jdbcType=' + column.jdbcType/>
 			</if>
 			</#if>
 			</#list>
 		</where>
 	</sql>
 	
-	<!-- 插入sql -->
-	<insert id="<@namespace/>insert" useGeneratedKeys="true" keyProperty="${table.idColumn.columnNameFirstLower}">
+	<!-- 插入-->
+	<insert id="insert" useGeneratedKeys="true" keyProperty="${table.idColumn.columnNameFirstLower}">
 		INSERT INTO ${table.sqlName}
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			<#list table.compositeIdColumns as column>
@@ -65,30 +65,30 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			</#list>
 			<#list table.notPkColumns as column>
 			<if test="${column.columnNameFirstLower} != null">
-				<@mapperEl column.columnNameFirstLower/>,
+				<@mapperEl column.columnNameFirstLower + ',jdbcType=' + column.jdbcType/>,
 			</if>
 			</#list>
 		</trim>
 	</insert>
 
-	<!-- 修改sql -->
-	<update id="<@namespace/>update">
+	<!-- 修改 -->
+	<update id="update">
 		UPDATE ${table.sqlName}
 		<set>
 			<#list table.notPkColumns as column>
 			<if test="${column.columnNameFirstLower} != null">
-				${column.sqlName} = <@mapperEl column.columnNameFirstLower/> <#if column_has_next>,</#if>
+				${column.sqlName} = <@mapperEl column.columnNameFirstLower + ',jdbcType=' + column.jdbcType/> <#if column_has_next>,</#if>
 			</if>
 			</#list>
 		</set>
 		WHERE
 		<#list table.compositeIdColumns as column>
-		${column.sqlName} = <@mapperEl column.columnNameLower/> <#if column_has_next> AND </#if>
+		${column.sqlName} = <@mapperEl column.columnNameLower + ',jdbcType=' + column.jdbcType/> <#if column_has_next> AND </#if>
 		</#list>
 	</update>
 
-	<!-- 删除sql -->
-	<delete id="<@namespace/>delete">
+	<!-- 删除 -->
+	<delete id="delete">
 	    <![CDATA[
 	        DELETE FROM ${table.sqlName} WHERE
 	        <#list table.compositeIdColumns as column>
@@ -97,10 +97,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	    ]]>
 	</delete>
 
-	<!-- 根据id主键获取sql -->
-	<select id="<@namespace/>get" resultMap="RM_${className}">
+
+	<!-- 根据主键获取 -->
+	<select id="get" resultMap="RM_${className}">
 		SELECT
-		<include refid="<@namespace/>columns" />
+		<include refid="columns" />
 	    <![CDATA[
 		    FROM ${table.sqlName} 
 	        WHERE 
@@ -110,40 +111,41 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	    ]]>
 	</select>
 
-	<!-- 分页查询统计sql -->
-	<select id="<@namespace/>query.count" resultType="java.lang.Integer">
-		SELECT count(1) FROM ${table.sqlName}
-		<include refid="<@namespace/>where" />
+	<!-- 统计 -->
+	<select id="count" resultType="java.lang.Integer">
+		SELECT count(*) FROM ${table.sqlName}
+		<include refid="where" />
 	</select>
 	
-	<!-- 分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页 因为分页查询将传 offset,pageSize,lastRows 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现 -->
-	<!-- 分页查询sql -->
-	<select id="<@namespace/>query" resultMap="RM_${className}">
+
+	<!-- 查询 -->
+	<select id="query" resultMap="RM_${className}">
 		SELECT
-		<include refid="<@namespace/>columns" />
+		<include refid="columns" />
 		FROM ${table.sqlName}
-		<include refid="<@namespace/>where" />
+		<include refid="where" />
 		<if test="sortColumns != null">
 			ORDER BY <@jspEl 'sortColumns'/>
 		</if>
 	</select>
 	
-	<!-- 根据条件查询sql -->
-	<select id="<@namespace/>queryByQuery" parameterType="${classNameFirstLower}Query" resultMap="RM_${className}">
+	<!-- 分页查询 -->
+	<select id="queryPage"  resultMap="RM_${className}">
 		SELECT
-		<include refid="<@namespace/>columns" />
+		<include refid="columns" />
 		FROM ${table.sqlName}
-		<include refid="<@namespace/>where" />
+		<include refid="where" />
 		<if test="sortColumns != null">
 			ORDER BY <@jspEl 'sortColumns'/>
 		</if>
+		LIMIT <@mapperEl 'begin'/>,<@mapperEl 'pageSize'/>
 	</select>
 
 	<#list table.columns as column>
 	<#if column.unique && !column.pk>
-	<select id="<@namespace/>getBy${column.columnName}" resultMap="RM_${className}" parameterType="${column.javaType}">
+	<select id="getBy${column.columnName}" resultMap="RM_${className}" parameterType="${column.javaType}">
 		SELECT
-		<include refid="<@namespace/>columns" />
+		<include refid="columns" />
 	    <![CDATA[
 	        FROM ${table.sqlName} where ${column.sqlName} = <@mapperEl column.columnNameLower/>
 	    ]]>

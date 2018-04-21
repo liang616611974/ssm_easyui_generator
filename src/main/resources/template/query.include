@@ -4,14 +4,17 @@
 
 	<#if (column.isDateTimeColumn || column.isDateColumn)&& !column.contains("**")>
 	/**
-     * ${column.columnAlias} 开始
+     * ${column.columnAlias}开始 ${column.sqlName}
      */
 	private Date ${column.columnNameLower}Begin;
 	/**
-     * ${column.columnAlias} 结束
+     * ${column.columnAlias}结束 ${column.sqlName}
      */
 	private Date ${column.columnNameLower}End;
 	<#else>
+	/**
+     * ${column.columnAlias!} ${column.sqlName}
+     */
 	private ${column.javaType} ${column.columnNameLower};
 	</#if>
 	</#list>

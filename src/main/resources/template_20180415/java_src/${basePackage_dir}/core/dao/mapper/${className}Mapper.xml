@@ -112,7 +112,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- 分页查询统计sql -->
 	<select id="<@namespace/>query.count" resultType="java.lang.Integer">
-		SELECT count(1) FROM ${table.sqlName}
+		SELECT count(*) FROM ${table.sqlName}
 		<include refid="<@namespace/>where" />
 	</select>
 	
