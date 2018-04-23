@@ -17,6 +17,10 @@
 	<entry key="pojoPackage">${baseModulePackage}.model.auto.pojo</entry>
 	<entry key="qoPackage">${baseModulePackage}.model.auto.qo</entry>
 	<entry key="mapperPackage">${baseModulePackage}.mapper</entry>
+	<entry key="servicePackage">${baseModulePackage}.service</entry>
+	<entry key="requestPackage">${baseModulePackage}.web.controller</entry>
+	<entry key="requestPackage">${baseModulePackage}.web.request</entry>
+	<entry key="responsePackage">${baseModulePackage}.web.response</entry>
 
 
 

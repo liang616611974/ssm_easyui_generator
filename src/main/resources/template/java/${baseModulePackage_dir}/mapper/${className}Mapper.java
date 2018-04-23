@@ -3,9 +3,8 @@
 <#assign classNameLower = className?uncap_first>   
 package ${mapperPackage};
 
-
-import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
+import ${baseObjPackage}.BaseMapper;
 import ${pojoPackage}.${className};
 import ${qoPackage}.${className}Query;
 
@@ -21,59 +20,7 @@ import ${qoPackage}.${className}Query;
 * @version 1.0
  */
 @Mapper
-public interface ${className}Mapper {
+public interface ${className}Mapper extends BaseMapper<${className},${className}Query,${table.idColumn.javaType}> {
 
-		/**
-		 * 保存
-		 * @param ${classNameLower}
-		 */
-		void insert(${className} ${classNameLower});
-
-		/**
-		 * 修改
-		 * @param ${classNameLower}
-		 */
-		void update(${className} ${classNameLower});
-
-		/**
-		 * 删除
-		 * @param id
-		 */
-		void delete(${table.idColumn.javaType} id);
-
-		/**
-		 * 获取
-		 * @param id
-		 */
-		${className} get(${table.idColumn.javaType} id);
-
-		/**
-		 * 查询
-		 * @return
-		 */
-		List<${className}> query(${className}Query query);
-
-		/**
-		 * 分页查询
-		 * @return
-		 */
-		List<${className}> queryPage(${className}Query query);
-
-		/**
-		 * 总记录数
-		 * @param query
-		 * @return
-		 */
-		int count(${className}Query query);
-
-	<#list table.columns as column>
-	<#if column.unique && !column.pk>
-		/**
-		 * 根据${column.columnAlias}获取
-		 */
-		${className} getBy${column.columnName}(${column.javaType} v);
-	
-	</#if>
-	</#list>
 
 }
