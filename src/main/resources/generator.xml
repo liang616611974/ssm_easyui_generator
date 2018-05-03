@@ -18,9 +18,11 @@
 	<entry key="qoPackage">${baseModulePackage}.model.auto.qo</entry>
 	<entry key="mapperPackage">${baseModulePackage}.mapper</entry>
 	<entry key="servicePackage">${baseModulePackage}.service</entry>
-	<entry key="requestPackage">${baseModulePackage}.web.controller</entry>
+	<entry key="controllerPackage">${baseModulePackage}.web.controller</entry>
 	<entry key="requestPackage">${baseModulePackage}.web.request</entry>
 	<entry key="responsePackage">${baseModulePackage}.web.response</entry>
+	<entry key="commonColumn">create_time,create_user,modify_time,modify_user</entry>
+	<entry key="webModule">goods</entry>
 
 
 

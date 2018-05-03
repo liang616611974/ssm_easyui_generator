@@ -29,16 +29,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
 		<where>
 			<#list table.columns as column>
-			<#if column.isDateTimeColumn>
+			<#if column.isDateColumn>
 			<if test="@Ognl@isNotEmpty(${column.columnNameFirstLower}Begin)">
 				AND ${column.sqlName} >= <@mapperEl column.columnNameFirstLower+"Begin" + ',jdbcType=' + column.jdbcType/>
 			</if>
 			<if test="@Ognl@isNotEmpty(${column.columnNameFirstLower}End)">
-				AND ${column.sqlName + ',jdbcType=' + column.jdbcType} &lt;= <@mapperEl column.columnNameFirstLower+"End" + ',jdbcType=' + column.jdbcType/>
+				AND ${column.sqlName} &lt;= <@mapperEl column.columnNameFirstLower+"End" + ',jdbcType=' + column.jdbcType/>
 			</if>
 			<#else>
 			<if test="@Ognl@isNotEmpty(${column.columnNameFirstLower})">
-				AND ${column.sqlName + ',jdbcType=' + column.jdbcType} = <@mapperEl column.columnNameFirstLower + ',jdbcType=' + column.jdbcType/>
+				AND ${column.sqlName} = <@mapperEl column.columnNameFirstLower + ',jdbcType=' + column.jdbcType/>
 			</if>
 			</#if>
 			</#list>
