@@ -10,10 +10,10 @@ import java.util.List;
 
 
 <#--
-		import ${corePackage}.model.pojo.${className};
-		import ${corePackage}.model.query.${className}Query;
-		import ${framePackage}.base.BaseTest;
-		import ${framePackage}.page.Page;
+import ${corePackage}.model.pojo.${className};
+import ${corePackage}.model.query.${className}Query;
+import ${framePackage}.base.BaseTest;
+import ${framePackage}.page.Page;
 import ${commonPackage}.helper.UUIDHelper;
 import ${corePackage}.model.pojo.${className};
 import ${basePackage}.${module}.dev.service.${className}Service;
