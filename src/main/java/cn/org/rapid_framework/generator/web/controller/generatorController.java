@@ -30,8 +30,8 @@ public class generatorController {
     }
 
     @RequestMapping(value = "download")
-    public void download(@RequestParam String tableName,@RequestParam String basePackage, HttpServletResponse response) throws Exception {
-        downloadZip(tableName,response);
+    public void download(@RequestParam String tableName,@RequestParam String tableChName, HttpServletResponse response) throws Exception {
+        downloadZip(tableName,tableChName,response);
     }
 
     /**
@@ -40,10 +40,11 @@ public class generatorController {
      * @param response
      * @throws Exception
      */
-    private synchronized void downloadZip(String tableName,HttpServletResponse response)throws Exception{
+    private synchronized void downloadZip(String tableName,String tableChName,HttpServletResponse response)throws Exception{
         GeneratorFacade g = new GeneratorFacade();
         //g.printAllTableNames();				//打印数据库中的表名称
         g.deleteOutRootDir();                            //删除生成器的输出目录
+        GeneratorProperties.setProperty("tableChName",tableChName);
         GeneratorProperties.setProperty("outRoot","");
         g.generateByTable(tableName, TEMPLATE_PATH);//通过数据库表生成文件,template为模板的根目录
         //g.generateByAllTable("template");	//自动搜索数据库中的所有表并生成文件,template为模板的根目录
