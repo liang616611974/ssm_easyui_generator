@@ -2,6 +2,7 @@ package ${testServicePackage};
 <#include "/java_copyright.include">
 <#assign className = table.className>
 <#assign classNameLower = className?uncap_first>
+<#assign tableName = tableChName!>
 import ${corePackage}.constant.AppConstant;
 import ${corePackage}.framework.base.BaseTest;
 import ${corePackage}.helper.ObjectHelper;
@@ -65,7 +66,7 @@ public class ${className}ServiceTest extends BaseTest{
         ${className}AddOrMdfRequestbody requestbody;
         AddResponsebody responsebody;
         ${className} ${classNameLower};
-        String errMsg = "测试添加商品失败";
+        String errMsg = "测试添加${tableName}失败";
 
         // 2.测试情景
         // 2.1 测试情景一
@@ -85,7 +86,7 @@ public class ${className}ServiceTest extends BaseTest{
         // 1.定义参数
         ${className}AddOrMdfRequestbody requestbody;
         ${className} ${classNameLower};
-        String errMsg = "测试修改商品失败";
+        String errMsg = "测试修改${tableName}失败";
 
         // 2.测试情景
         // 2.1 测试情景一
@@ -108,7 +109,7 @@ public class ${className}ServiceTest extends BaseTest{
         // 1.定义参数
         RemoveRequestbody requestbody;
         ${className} ${classNameLower};
-        String errMsg = "测试删除商品失败";
+        String errMsg = "测试删除${tableName}失败";
 
         // 2.测试情景
         // 2.1 测试情景一
@@ -132,7 +133,7 @@ public class ${className}ServiceTest extends BaseTest{
         GetRequestbody requestbody;
         ${className}GetResponsebody responsebody;
         ${className} ${classNameLower};
-        String errMsg = "测试获取商品失败";
+        String errMsg = "测试获取${tableName}失败";
 
         // 2.测试情景
         // 2.1 测试情景一
@@ -154,7 +155,7 @@ public class ${className}ServiceTest extends BaseTest{
         ${className}QueryRequestbody requestbody;
         ${className}QueryResponsebody responsebody;
         ${className} ${classNameLower};
-        String errMsg = "测试查询商品失败";
+        String errMsg = "测试查询${tableName}失败";
 
         // 2.测试情景
         // 2.1 测试情景一
@@ -182,7 +183,7 @@ public class ${className}ServiceTest extends BaseTest{
         ${className}QueryRequestbody requestbody;
         ${className}QueryResponsebody responsebody;
         ${className} ${classNameLower};
-        String errMsg = "测试查询商品失败";
+        String errMsg = "测试查询${tableName}失败";
 
         // 2.测试情景
         // 2.1 测试情景一

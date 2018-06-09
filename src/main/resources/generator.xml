@@ -8,10 +8,9 @@
 	</comment>
 	
 	<!-- 包的基础路径 ${basepackage}.model-->
-	<entry key="basePackage">com.liangfeng.study</entry>
+	<!--<entry key="basePackage">com.liangfeng.study</entry>
 	<entry key="module">goods</entry>
 	<entry key="corePackage">${basePackage}.core</entry>
-	<!--<entry key="commonPackage">${basePackage}.common</entry>-->
 	<entry key="baseObjPackage">${corePackage}.framework.base</entry>
 	<entry key="baseModulePackage">${basePackage}.${module}</entry>
 	<entry key="pojoPackage">${baseModulePackage}.model.auto.pojo</entry>
@@ -22,18 +21,17 @@
 	<entry key="requestPackage">${baseModulePackage}.web.request</entry>
 	<entry key="responsePackage">${baseModulePackage}.web.response</entry>
 	<entry key="testServicePackage">${baseModulePackage}.test.service</entry>
-	<entry key="commonColumn">create_time,create_user,modify_time,modify_user</entry>
-	<entry key="webModule">goods</entry>
+	<entry key="commonColumn">cre_time,cre_user,mdf_time,mdf_user</entry>-->
 
 
 
 	<!-- jsp namespace: web/${namespace}/${className}/list.jsp -->
 	<entry key="namespace">pages</entry>
 
-	<entry key="outRoot">C:\Users\Administrator\Desktop\generator\temp</entry>
+	<entry key="outRoot">C:\Users\61661\Desktop\generator</entry>
 	
 	<!-- 需要移除的表名前缀,使用逗号进行分隔多个前缀,示例值: t_,v_ -->
-	<entry key="tableRemovePrefixes">a_</entry>
+	<entry key="tableRemovePrefixes">scd_</entry>
 	
 	<!-- oracle需要指定jdbc.schema,并且可能要大写，其它数据库忽略此项配置  -->
 	<entry key="jdbc.schema">FSWCM70</entry>
