@@ -54,20 +54,20 @@ public class ${className}Controller {
 
     @ApiOperation(value = "删除${tableName}")
     @PostMapping("/${classNameLower}/remove")
-    public Response remove(@Validated({Request.Remove.class}) @RequestBody RemoveRequestbody requestbody) {
+    public Response remove(@Validated @RequestBody RemoveRequestbody requestbody) {
         service.remove(requestbody);
         return Response.success();
     }
 
     @ApiOperation(value = "获取${tableName}详细信息")
     @PostMapping("/${classNameLower}/get")
-    public Response<${className}GetResponsebody> get(@Validated(Request.Get.class) @RequestBody GetRequestbody requestbody) {
+    public Response<${className}GetResponsebody> get(@Validated @RequestBody GetRequestbody requestbody) {
         return Response.success(service.get(requestbody));
     }
 
     @ApiOperation(value = "分页查询${tableName}")
     @PostMapping("/${classNameLower}/queryPage")
-    public Response<${className}QueryResponsebody> queryPage(@Validated(Request.Get.class) @RequestBody ${className}QueryRequestbody requestbody) {
+    public Response<${className}QueryResponsebody> queryPage(@Validated @RequestBody ${className}QueryRequestbody requestbody) {
         return Response.success(service.queryPage(requestbody));
     }
 
