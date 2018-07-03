@@ -39,7 +39,7 @@ public class ${className}QueryResponsebody extends QueryPageResponsebody<${class
     /**
      * ${column.columnAlias!} ${column.sqlName}
      */
-    @ApiModelProperty(value = "${column.columnAlias!}",example = "${column.isDateTimeColumn?string("2018-01-01 00:00:00","2018-01-01")}")
+    @ApiModelProperty(value = "${column.columnAlias!}", example = "${column.isDateTimeColumn?string("2018-01-01 00:00:00","2018-01-01")}")
     @JsonFormat(pattern = ${column.isDateTimeColumn?string("AppConstant.PATTERN_DATETIME","AppConstant.PATTERN_DATE")},locale = AppConstant.LOCALE,timezone = AppConstant.TIMEZONE)
     private Date ${column.columnNameLower};
 
@@ -47,7 +47,7 @@ public class ${className}QueryResponsebody extends QueryPageResponsebody<${class
     /**
      * ${column.columnAlias!} ${column.sqlName}
      */
-    @ApiModelProperty(value = "${column.columnAlias!}",example = "${column.javaType?contains("String")?string(column.columnAlias!,"")}")
+    @ApiModelProperty(value = "${column.columnAlias!}", example = "${column.javaType?contains("String")?string(column.columnAlias!,"")}")
     private ${column.javaType} ${column.columnNameLower};
 
 </#if>
