@@ -92,7 +92,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	    <![CDATA[
 	        DELETE FROM ${table.sqlName} WHERE
 	        <#list table.compositeIdColumns as column>
-	        ${column.sqlName} = <@mapperEl 'id'/> <#if column_has_next> AND </#if>
+	        ${column.sqlName} = <@mapperEl column.columnNameLower/> <#if column_has_next> AND </#if>
 			</#list>
 	    ]]>
 	</delete>
@@ -106,7 +106,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		    FROM ${table.sqlName} 
 	        WHERE 
 				<#list table.compositeIdColumns as column>
-		        ${column.sqlName} = <@mapperEl 'id'/> <#if column_has_next> AND </#if>
+		        ${column.sqlName} = <@mapperEl column.columnNameLower/> <#if column_has_next> AND </#if>
 		        </#list>    
 	    ]]>
 	</select>

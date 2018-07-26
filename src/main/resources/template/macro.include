@@ -5,3 +5,15 @@
 
 <#-- MyBatis 获取值表达式 -->
 <#macro mapperEl value>${r"#{"}${value}}</#macro>
+
+<#-- Swagger 字段默认值example -->
+<#function exampleVal type val>
+    <#if type?contains("String")>
+        <#assign eVal=val>
+    <#elseif type?contains("Boolean")>
+        <#assign eVal="true">
+    <#else>
+        <#assign eVal="1">
+    </#if>
+    <#return eVal>
+</#function>
