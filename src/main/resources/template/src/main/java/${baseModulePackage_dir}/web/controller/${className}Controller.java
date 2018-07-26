@@ -73,9 +73,9 @@ public class ${className}Controller {
 
     @ApiOperation(value = "导出${tableName}")
     @RequestMapping(value = "/${classNameLower}/export",method = {RequestMethod.GET,RequestMethod.POST})
-    public void export(${className}QueryRequestbody requestbody,String dowloadName,HttpServletRequest request, HttpServletResponse response){
+    public void export(${className}QueryRequestbody requestbody,String downloadName,HttpServletRequest request, HttpServletResponse response){
         ${className}QueryResponsebody responsebody = service.query(requestbody);
-        ExcelHelper.exportForDownloadByObj(request,response,dowloadName,responsebody.getRows(),${className}GetResponsebody.class);
+        ExcelHelper.exportForDownloadByObj(request,response,downloadName,responsebody.getRows(),${className}GetResponsebody.class);
     }
    
 }
