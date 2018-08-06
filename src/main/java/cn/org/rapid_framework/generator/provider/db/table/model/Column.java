@@ -479,7 +479,15 @@ public class Column implements java.io.Serializable,Cloneable{
 		return DatabaseDataTypesUtils.isFloatNumber(getJavaType()) 
 			|| DatabaseDataTypesUtils.isIntegerNumber(getJavaType());
 	}
-	
+
+	public boolean getIsFloatColumn() {
+		return DatabaseDataTypesUtils.isFloatNumber(getJavaType());
+	}
+
+	public boolean getIsIntegerColumn() {
+		return DatabaseDataTypesUtils.isIntegerNumber(getJavaType());
+	}
+
 	/** 检查是否包含某些关键字,关键字以逗号分隔 */
 	public boolean contains(String keywords) {
 		if(keywords == null) throw new IllegalArgumentException("'keywords' must be not null");

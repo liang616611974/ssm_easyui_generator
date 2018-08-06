@@ -10,7 +10,7 @@
                     <#list table.notPkColumns as column>
                     <#if column.isNumberColumn && !column.contains(commonColumn)>
                     <span><input name="${column.columnNameLower}"
-                                  prop="label:'${column.columnAlias!}：';prompt:'请填写${column.columnAlias!}';type:'number'"/></span>
+                                  prop="label:'${column.columnAlias!}：';prompt:'请填写${column.columnAlias!}';type:'${column.isFloatColumn?string('float','int')}'"/></span>
                     <#elseif column.isDateColumn>
                     <span><input id="${column.columnNameLower}Begin" name="${column.columnNameLower}Begin"
                                   prop="label:'${column.columnAlias!}开始：';prompt:'请选择${column.columnAlias!}开始';type:'${column.isDateTimeColumn?string('datetime','date')}'"
@@ -34,7 +34,6 @@
         </div>
 
         <div class="page-btn page-btn-right">
-            <!--<a id="testBtn" prop="event:'test'">测试</a>-->
             <a id="queryBtn" prop="event:'query'">查询</a>
             <a id="resetBtn" prop="event:'reset'">重置</a>
             <a id="addBtn" prop="event:'add'">新增</a>
@@ -50,4 +49,4 @@
 </div>
 
 
-<script type="text/javascript" src="./script/${classNameFirstLower}/${classNameFirstLower}.js"></script>
+<script type="text/javascript" src="./script/${module}/${classNameFirstLower}.js"></script>

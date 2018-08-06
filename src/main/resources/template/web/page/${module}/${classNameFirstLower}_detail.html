@@ -11,17 +11,17 @@
                     <#-- 判断是否是公共列-->
                     <#if column.contains(commonColumn)>
                     <#else>
-                    <#-- 不是则生成表单元素-->
-                    <#-- 是否非主键-->
+                    <#-- 不是则生成表单元素开始-->
+                    <#-- 非主键不生成span元素开始-->
                     <#if !column.isPkColumn>
                     <span>
                     </#if>
-                    <#-- 是否非主键-->
+                    <#-- 非主键不生成span元素结束-->
                     <#if column.isPkColumn>
                     <input name="${column.columnNameLower}" type="hidden"/>
                     <#elseif column.isNumberColumn>
                         <input name="${column.columnNameLower}" ${column.isRequire()?string("required=\"true\"","")}
-                                prop="label:'${column.columnAlias!}：';prompt:'请填写${column.columnAlias!}';type:'number'"/>
+                                prop="label:'${column.columnAlias!}：';prompt:'请填写${column.columnAlias!}';type:'${column.isFloatColumn?string('float','int')}'"/>
                     <#elseif column.isDateColumn>
                         <input name="${column.columnNameLower}" ${column.isRequire()?string("required=\"true\"","")}
                                 prop="label:'${column.columnAlias!}：';prompt:'请选择${column.columnAlias!}';type:'${column.isDateTimeColumn?string('datetime','date')}'"/>
@@ -35,16 +35,17 @@
                                prop="label:'${column.columnAlias!}：';prompt:'请填写${column.columnAlias!}';type:'text'"
                                data-options="validType:['minLength[2]','maxLength[20]']"/>
                     </#if>
-                    <#-- 是否必填-->
+                    <#-- 不是则生成表单元素结束-->
+                    <#-- 是否必填开始-->
                     <#if !column.isNullable() && !column.isPkColumn>
                         <label class="rq">*</label>
                     </#if>
-                    <#-- 是否必填-->
-                    <#-- 是否非主键-->
+                    <#-- 是否必填结束-->
+                    <#-- 非主键不生成span元素开始-->
                     <#if !column.isPkColumn>
                     </span>
                     </#if>
-                    <#-- 是否非主键-->
+                    <#-- 非主键不生成span元素结束-->
                     </#if>
                     </#list>
                 </div>
@@ -57,4 +58,4 @@
     </div>
 </div>
 
-<script type="text/javascript" src="./script/${classNameFirstLower}/${classNameFirstLower}_detail.js"></script>
+<script type="text/javascript" src="./script/${module}/${classNameFirstLower}_detail.js"></script>

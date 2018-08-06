@@ -22,22 +22,21 @@ page.${cNameFL}.init = {
             queryParams: {sortColumns: "id desc,cre_time desc"},
             columns: [[
                 {field: 'ck', checkbox: true, width: 50},
-                <#assign arr=(commonColumn?split(","))>
                 <#list table.columns as column>
                 <#if column.isPkColumn>
                 {field: '${column.columnNameLower}', title: '${column.columnAlias!}', width: 10, hidden: 'true'},
-                <#elseif column.isNumberColumn && !arr?seq_contains(column.sqlName)>
+                <#elseif column.isNumberColumn && !column.contains(commonColumn)>
                 {field: '${column.columnNameLower}', title: '${column.columnAlias!}', width: 100,
                     formatter: function (value, row, index) {
                         return numUtil.toThousands(value);
                     }
                 },
                 <#elseif column.isDateColumn>
-                {field: '${column.columnNameLower}', title: '${column.columnAlias!}', width: 100},
+                {field: '${column.columnNameLower}', title: '${column.columnAlias!}', width: ${column.isDateTimeColumn?string(150,100)}},
                 <#elseif column.columnAlias?contains("(")>
                 <#assign ds=column.columnAlias?index_of("(")>
                 <#assign de=column.columnAlias?index_of(")")>
-                {field: '${column.columnNameLower}', title: '${column.columnAlias!}', width: 100,
+                {field: '${column.columnNameLower}', title: '${column.columnAlias?substring(0,ds)}', width: 100,
                     formatter: function (value, row, index) {
                         return system.getDictDesc("${column.columnAlias?substring(ds+1,de)}", value);
                     }
@@ -92,21 +91,21 @@ page.${cNameFL}.fucn = {
     add: function () {
         var page = window.page.${cNameFL};
         window.page.action = "add";
-        adminUI.openWindow(page,"${tableName}新增", "page/${cNameFL}/${cNameFL}_detail.html");
+        adminUI.openWindow(page,"${tableName}新增", "page/${module}/${cNameFL}_detail.html");
     },
     modify : function (index) {
         var page = window.page.${cNameFL};
         var row = system.getDgRow(page.dg,index);
         window.page.action = "modify";
         window.page.param = row;
-        adminUI.openWindow(page,"${tableName}修改", "page/${cNameFL}/${cNameFL}_detail.html");
+        adminUI.openWindow(page,"${tableName}修改", "page/${module}/${cNameFL}_detail.html");
     },
     detail : function (index) {
         var page = window.page.${cNameFL};
         var row = system.getDgRow(page.dg,index);
         window.page.action = "detail";
         window.page.param = row;
-        adminUI.openWindow(page,"${tableName}详情","page/${cNameFL}/${cNameFL}_detail.html");
+        adminUI.openWindow(page,"${tableName}详情","page/${module}/${cNameFL}_detail.html");
     },
     remove: function (index) {
         var page = window.page.${cNameFL};
