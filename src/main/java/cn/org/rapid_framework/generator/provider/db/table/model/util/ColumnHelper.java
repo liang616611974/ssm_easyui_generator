@@ -2,6 +2,7 @@ package cn.org.rapid_framework.generator.provider.db.table.model.util;
 
 import cn.org.rapid_framework.generator.provider.db.table.model.Column;
 import cn.org.rapid_framework.generator.util.typemapping.DatabaseDataTypesUtils;
+import org.apache.commons.lang3.StringUtils;
 
 public class ColumnHelper {
 	
@@ -14,9 +15,17 @@ public class ColumnHelper {
 	public static String getHibernateValidatorExpression(Column c) {
 		if(!c.isPk() && !c.isNullable()) {
 			if(DatabaseDataTypesUtils.isString(c.getJavaType())) {
-				return  "@NotBlank " + "\r\n    " + getNotRequiredHibernateValidatorExpression(c);
+				if(StringUtils.isNoneBlank(getNotRequiredHibernateValidatorExpression(c))){
+					return  "@NotBlank " + "\r\n    " + getNotRequiredHibernateValidatorExpression(c);
+				}else {
+					return  "@NotBlank";
+				}
 			}else {
-				return  "@NotNull " + "\r\n    " + getNotRequiredHibernateValidatorExpression(c);
+				if(StringUtils.isNoneBlank(getNotRequiredHibernateValidatorExpression(c))){
+					return  "@NotNull " + "\r\n    " + getNotRequiredHibernateValidatorExpression(c);
+				}else {
+					return  "@NotNull";
+				}
 			}
 		}else {
 			return getNotRequiredHibernateValidatorExpression(c);

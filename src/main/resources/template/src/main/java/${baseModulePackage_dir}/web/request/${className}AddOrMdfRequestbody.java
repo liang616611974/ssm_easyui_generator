@@ -13,6 +13,8 @@ import lombok.Data;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import org.hibernate.validator.constraints.*;
+import javax.validation.constraints.NotNull;
 
 
 /**
@@ -40,6 +42,9 @@ public class ${className}AddOrMdfRequestbody extends AddOrMdfRequestbody{
      */
     @ApiModelProperty(value = "${column.columnAlias!}", example = "${column.isDateTimeColumn?string("2018-01-01 00:00:00","2018-01-01")}")
     @JsonFormat(pattern = ${column.isDateTimeColumn?string("AppConstant.PATTERN_DATETIME","AppConstant.PATTERN_DATE")},locale = AppConstant.LOCALE,timezone = AppConstant.TIMEZONE)
+    <#if column.hibernateValidatorExprssion!="">
+    ${column.hibernateValidatorExprssion}
+    </#if>
     private Date ${column.columnNameLower};
 
 <#else>
@@ -47,6 +52,9 @@ public class ${className}AddOrMdfRequestbody extends AddOrMdfRequestbody{
      * ${column.columnAlias!} ${column.sqlName}
      */
     @ApiModelProperty(value = "${column.columnAlias!}", example = "${exampleVal(column.javaType,column.columnAlias)}")
+    <#if column.hibernateValidatorExprssion!="">
+    ${column.hibernateValidatorExprssion}
+    </#if>
     private ${column.javaType} ${column.columnNameLower};
 
 </#if>

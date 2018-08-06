@@ -1,37 +1,60 @@
-<div id="goodsDetailDiv" class="page">
+<#assign className = table.className/>
+<#assign tableName = tableChName!>
+<#assign classNameFirstLower = className?uncap_first/>
+<#assign classNameLowerCase = className?lower_case/>
+<div id="${classNameFirstLower}DetailDiv" class="page">
     <div class="dg-toolbar">
         <div class="page-fm">
             <form id="fm">
                 <div class="fm-input">
-                    <input name="id" type="hidden"/>
-                    <input name="imgUrl" type="hidden"/>
-                    <span><input id="goodsName" name="goodsName" prop="label:'商品名称：';prompt:'请填写商品名称';type:'text'"
-                                 data-options="required:true,validType:['minLength[2]','maxLength[20]']"/><label class="rq">*</label></span>
-                    <span><input id="goodsType" name="goodsType" prop="label:'商品类型：';type:'select';dict:'GOODS_FIRST_TYPE'" required="true"/><label class="rq">*</label></span>
-                    <span><input  id="price" name="price" prop="label:'价格：';prompt:'请填写价格';type:'number'" required="true"/><label class="rq">*</label></span>
-                    <span><input  id="producer" name="producer" prop="label:'生产商：';prompt:'请填写生产商'"
-                                 data-options="validType:['minLength[2]','maxLength[20]']"/></span>
-                    <span><input  id="produceDate" name="produceDate" prop="label:'生产日期：';prompt:'请选择生产日期';type:'date'"/></span>
+                    <#list table.columns as column>
+                    <#-- 判断是否是公共列-->
+                    <#if column.contains(commonColumn)>
+                    <#else>
+                    <#-- 不是则生成表单元素-->
+                    <#-- 是否非主键-->
+                    <#if !column.isPkColumn>
+                    <span>
+                    </#if>
+                    <#-- 是否非主键-->
+                    <#if column.isPkColumn>
+                    <input name="${column.columnNameLower}" type="hidden"/>
+                    <#elseif column.isNumberColumn>
+                        <input name="${column.columnNameLower}" ${column.isRequire()?string("required=\"true\"","")}
+                                prop="label:'${column.columnAlias!}：';prompt:'请填写${column.columnAlias!}';type:'number'"/>
+                    <#elseif column.isDateColumn>
+                        <input name="${column.columnNameLower}" ${column.isRequire()?string("required=\"true\"","")}
+                                prop="label:'${column.columnAlias!}：';prompt:'请选择${column.columnAlias!}';type:'${column.isDateTimeColumn?string('datetime','date')}'"/>
+                    <#elseif column.columnAlias?contains("(")>
+                    <#assign ds=column.columnAlias?index_of("(")>
+                    <#assign de=column.columnAlias?index_of(")")>
+                        <input name="${column.columnNameLower}" ${column.isRequire()?string("required=\"true\"","")}
+                                prop="label:'${column.columnAlias?substring(0,ds)}：';type:'select';dict:'${column.columnAlias?substring(ds+1,de)}'"/>
+                    <#else>
+                        <input name="${column.columnNameLower}" ${column.isRequire()?string("required=\"true\"","")}
+                               prop="label:'${column.columnAlias!}：';prompt:'请填写${column.columnAlias!}';type:'text'"
+                               data-options="validType:['minLength[2]','maxLength[20]']"/>
+                    </#if>
+                    <#-- 是否必填-->
+                    <#if !column.isNullable() && !column.isPkColumn>
+                        <label class="rq">*</label>
+                    </#if>
+                    <#-- 是否必填-->
+                    <#-- 是否非主键-->
+                    <#if !column.isPkColumn>
+                    </span>
+                    </#if>
+                    <#-- 是否非主键-->
+                    </#if>
+                    </#list>
                 </div>
             </form>
         </div>
-        <div class="page-upload">
-            <form id="multiFm" enctype="multipart/form-data">
-                <input id="img" name="img" prop="label:'商品图片：';prompt:'请选择文件';buttonText:'选择文件';width:550;type:'img'"/>
-                <a prop="event:'upload'" style="margin-left: 10px;">上传</a>
-            </form>
-        </div>
-        <div class="page-img-list" style="margin-top: 10px;">
-
-        </div>
         <div class="page-btn">
-            <a id="testBtn" prop="event:'test'">测试</a>
             <a prop="event:'save'">保存</a>
             <a prop="event:'cancel'">取消</a>
         </div>
     </div>
-
 </div>
 
-
-<script type="text/javascript" src="./script/goods/goods_detail.js"></script>
+<script type="text/javascript" src="./script/${classNameFirstLower}/${classNameFirstLower}_detail.js"></script>

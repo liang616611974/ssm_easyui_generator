@@ -485,7 +485,14 @@ public class Column implements java.io.Serializable,Cloneable{
 		if(keywords == null) throw new IllegalArgumentException("'keywords' must be not null");
 		return StringHelper.contains(getSqlName(), keywords.split(","));
 	}
-	
+
+	/**
+	 * 检查是否必填
+	 */
+	public boolean isRequire(){
+		return !_isNullable;
+	}
+
 	public boolean isHtmlHidden() {
 		return isPk() && _table.isSingleId();
 	}

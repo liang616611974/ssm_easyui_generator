@@ -1,6 +1,5 @@
-<#include "/macro.include"/>
-<#include "/custom.include"/>
 <#assign className = table.className/>
+<#assign tableName = tableChName!>
 <#assign classNameFirstLower = className?uncap_first/>
 <#assign classNameLowerCase = className?lower_case/>
 <div id="${classNameFirstLower}Div" class="page">
@@ -9,7 +8,10 @@
             <form id="fm">
                 <div class="fm-input fm-input-left">
                     <#list table.notPkColumns as column>
-                    <#if column.isDateColumn>
+                    <#if column.isNumberColumn && !column.contains(commonColumn)>
+                    <span><input name="${column.columnNameLower}"
+                                  prop="label:'${column.columnAlias!}：';prompt:'请填写${column.columnAlias!}';type:'number'"/></span>
+                    <#elseif column.isDateColumn>
                     <span><input id="${column.columnNameLower}Begin" name="${column.columnNameLower}Begin"
                                   prop="label:'${column.columnAlias!}开始：';prompt:'请选择${column.columnAlias!}开始';type:'${column.isDateTimeColumn?string('datetime','date')}'"
                                   validType="compare['${column.columnNameLower}End','${column.isDateTimeColumn?string('datetime','date')}','<=','${column.columnAlias!}开始应该小于等于${column.columnAlias!}结束']"/></span>
@@ -20,7 +22,7 @@
                         <#assign ds=column.columnAlias?index_of("(")>
                         <#assign de=column.columnAlias?index_of(")")>
                     <span><input name="${column.columnNameLower}"
-                                 prop="label:'${column.columnAlias?substring(0,ds)}：';prompt:'请选择${column.columnAlias?substring(0,ds)}';type:'select';dict:'${column.columnAlias?substring(ds+1,de)}'"/></span>
+                                  prop="label:'${column.columnAlias?substring(0,ds)}：';prompt:'请选择${column.columnAlias?substring(0,ds)}';type:'select';dict:'${column.columnAlias?substring(ds+1,de)}'"/></span>
                     <#else>
                     <span><input name="${column.columnNameLower}"
                                   prop="label:'${column.columnAlias!}：';prompt:'请填写${column.columnAlias!}';type:'text'"
