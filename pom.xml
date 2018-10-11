@@ -47,10 +47,11 @@
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
 
-        <!-- Oracle -->
+        <!--Oracle jdbc驱动 -->
         <dependency>
-            <groupId>ojdbc</groupId>
-            <artifactId>ojdbc</artifactId>
+            <groupId>com.oracle</groupId>
+            <artifactId>ojdbc14</artifactId>
+            <version>10.2.0.1.0</version>
         </dependency>
 
         <dependency>

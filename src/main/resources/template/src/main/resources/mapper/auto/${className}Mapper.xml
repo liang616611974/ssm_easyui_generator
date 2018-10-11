@@ -128,18 +128,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			ORDER BY <@jspEl 'sortColumns'/>
 		</if>
 	</select>
-	
-	<!-- 分页查询 -->
-	<select id="queryPage"  resultMap="RM_${className}">
-		SELECT
-		<include refid="columns" />
-		FROM ${table.sqlName}
-		<include refid="where" />
-		<if test="sortColumns != null">
-			ORDER BY <@jspEl 'sortColumns'/>
-		</if>
-		LIMIT <@mapperEl 'begin'/>,<@mapperEl 'pageSize'/>
-	</select>
 
 	<#list table.columns as column>
 	<#if column.unique && !column.pk>

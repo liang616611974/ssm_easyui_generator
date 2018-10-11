@@ -22,6 +22,9 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+
 
 /**
  * @author Liangfeng
@@ -106,22 +109,16 @@ public class ${className}ServiceImpl implements ${className}Service {
         // 1.定义参数
         ${className}QueryResponsebody responseBody = new ${className}QueryResponsebody();
         ${className}Query ${classNameLower}Query = new ${className}Query();
-        BeanUtils.copyProperties(requestbody,${classNameLower}Query);
-        int total = 0;
-
-        // 2.查询总数
-        total = ${classNameLower}Mapper.count(${classNameLower}Query);
-        responseBody.setTotal(total);
-
-        // 3.分页查询集合
-        // 3.1 如何没有数据则直接返回。
-        if(responseBody.getTotal()==0){
-            return responseBody;
-        }
-
-        // 3.2 有数据
         requestbody.setSortColumns("id desc");
-        List<${className}> ${classNameLower}s = ${classNameLower}Mapper.queryPage(${classNameLower}Query);
+        BeanUtils.copyProperties(requestbody, ${classNameLower}Query);
+
+        // 2.使用分页插件分页查询,核心代码就这一行
+        PageHelper.startPage(requestbody.getPageNum(), requestbody.getPageSize());
+        List<${className}> ${classNameLower}s = ${classNameLower}Mapper.query(${classNameLower}Query);
+        PageInfo<${className}> pageInfo = new PageInfo<>(${classNameLower}s);
+
+        // 3.封装数据并返回
+        responseBody.setTotal(pageInfo.getTotal());
         List<${className}GetResponsebody> getResponseBodies = responseBody.getRows();
         for (${className} ${classNameLower} : ${classNameLower}s) {
             ${className}GetResponsebody getResponseBody = new ${className}GetResponsebody();
@@ -130,5 +127,6 @@ public class ${className}ServiceImpl implements ${className}Service {
         }
         return responseBody;
     }
+
 }
 

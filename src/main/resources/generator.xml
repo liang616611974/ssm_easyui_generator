@@ -34,7 +34,7 @@
 	<entry key="tableRemovePrefixes">scd_</entry>
 	
 	<!-- oracle需要指定jdbc.schema,并且可能要大写，其它数据库忽略此项配置  -->
-	<entry key="jdbc.schema">FSWCM70</entry>
+	<entry key="jdbc.schema">GFSMART_NLP</entry>
 	<entry key="jdbc.catalog"></entry>
 	
 	<!-- 数据库类型至java类型映射  -->
@@ -49,21 +49,32 @@
 	<entry key="java_typemapping.java.sql.Time">Time</entry>	
 	<entry key="java_typemapping.java.sql.Timestamp">Timestamp</entry>
 	<entry key="java_typemapping.java.math.BigDecimal">BigDecimal</entry>
-	
-	<!-- Mysql -->
+
+	<!--<entry key="jdbc.url">jdbc:mysql://127.0.0.1:3306/gf_smart_article?characterEncoding=UTF-8</entry>-->
+
 	<entry key="jdbc.url">jdbc:mysql://127.0.0.1:3306/spring_cloud_demo?characterEncoding=UTF-8</entry>
 	<entry key="jdbc.driver">com.mysql.jdbc.Driver</entry>
 	<entry key="jdbc.username">root</entry>
 	<entry key="jdbc.password">root</entry>
-	
+
+
+	<!--<entry key="jdbc.url">jdbc:oracle:thin:@10.2.145.46:1521:windtest</entry>
+	<entry key="jdbc.driver">oracle.jdbc.driver.OracleDriver</entry>
+	<entry key="jdbc.username">gfsmart_nlp</entry>
+	<entry key="jdbc.password">nlp123456</entry>-->
+
+
+	<!-- Mysql -->
+	<!--<entry key="jdbc.url">jdbc:mysql://127.0.0.1:3306/gf_smart_article?characterEncoding=UTF-8</entry>
+	&lt;!&ndash;<entry key="jdbc.url">jdbc:mysql://127.0.0.1:3306/spring_cloud_demo?characterEncoding=UTF-8</entry>&ndash;&gt;
+	<entry key="jdbc.driver">com.mysql.jdbc.Driver</entry>
+	<entry key="jdbc.username">root</entry>
+	<entry key="jdbc.password">root</entry>-->
 	
 	<!-- Oracle		jdbc:oracle:oci:@tnsname_devdb
 	<entry key="jdbc.url">jdbc:oracle:thin:@192.168.0.177:1521:[sid]</entry>
 	<entry key="jdbc.driver">oracle.jdbc.driver.OracleDriver</entry>
 	-->
-	<!-- <entry key="jdbc.url">jdbc:oracle:thin:@219.130.221.184:1521:fstrsdb1</entry>
-	<entry key="jdbc.driver">oracle.jdbc.driver.OracleDriver</entry> -->
-	
 	
 	<!-- SQLServer2000 
 	<entry key="jdbc.url">jdbc:microsoft:sqlserver://localhost:1433;DatabaseName=[database]</entry>
