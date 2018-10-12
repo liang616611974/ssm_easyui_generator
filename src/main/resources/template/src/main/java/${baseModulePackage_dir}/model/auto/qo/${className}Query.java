@@ -10,6 +10,7 @@ import java.util.Date;
 import java.math.BigDecimal;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 
 /**
@@ -20,6 +21,7 @@ import lombok.Data;
  * @date ${now?string("yyyy-MM-dd")}
  */
 @Data
+@NoArgsConstructor
 public class ${className}Query extends BaseQuery {
 
 	<@generateFields/>

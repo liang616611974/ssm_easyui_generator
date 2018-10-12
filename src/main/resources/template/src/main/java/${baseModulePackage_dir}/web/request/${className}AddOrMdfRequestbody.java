@@ -8,14 +8,17 @@ import ${corePackage}.constant.AppConstant;
 
 import java.util.Date;
 import java.math.BigDecimal;
-import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
+
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.hibernate.validator.constraints.*;
 import javax.validation.constraints.NotNull;
 
+import io.swagger.annotations.ApiModelProperty;
+
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * @author Liangfeng
@@ -25,6 +28,7 @@ import javax.validation.constraints.NotNull;
  * @date ${now?string("yyyy-MM-dd")}
  */
 @Data
+@NoArgsConstructor
 public class ${className}AddOrMdfRequestbody extends AddOrMdfRequestbody{
 	
 <@generateFields/>

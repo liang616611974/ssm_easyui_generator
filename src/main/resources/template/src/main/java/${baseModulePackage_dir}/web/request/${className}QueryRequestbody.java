@@ -8,12 +8,15 @@ import ${corePackage}.constant.AppConstant;
 
 import java.util.Date;
 import java.math.BigDecimal;
-import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
+
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import io.swagger.annotations.ApiModelProperty;
+
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * @author Liangfeng
@@ -23,6 +26,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
  * @date ${now?string("yyyy-MM-dd")}
  */
 @Data
+@NoArgsConstructor
 public class ${className}QueryRequestbody extends QueryPageRequestbody{
 	
 <@generateFields/>
